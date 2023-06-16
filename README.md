@@ -1,3 +1,8 @@
+# Technologies
+
+- Java 17
+- Spring Framework
+
 # Running the API
 
 ## Requirements
@@ -17,6 +22,13 @@
     - Make sure the `JDBC URL` field is `jdbc:h2:mem:testdb`
 
 # Testing the API
+
+## Restrictions
+
+_Bookings_ and _Blocks_ can only be created if they belong to a _Property_. This means that Properties must be created
+first.
+
+## Endpoints
 
 You can use any client to perform HTTP requests against the API. The following endpoints are available:
 

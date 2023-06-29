@@ -4,14 +4,14 @@ import com.example.booking.domain.dto.*;
 import com.example.booking.domain.service.BlockService;
 import com.example.booking.domain.service.BookingService;
 import com.example.booking.domain.service.PropertyService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RestController
 @RequestMapping(path = "/api")
 public class BookingController {

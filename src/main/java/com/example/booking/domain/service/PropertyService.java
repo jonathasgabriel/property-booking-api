@@ -7,6 +7,7 @@ import com.example.booking.domain.repository.PropertyRepository;
 import com.example.booking.domain.validator.PropertyValidator;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,10 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class PropertyService {
 
+    @Autowired
     private PropertyRepository propertyRepository;
+
+    @Autowired
     private PropertyValidator propertyValidator;
 
     @Transactional

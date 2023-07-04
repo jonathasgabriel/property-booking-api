@@ -3,7 +3,6 @@ package com.example.booking.domain.service;
 import com.example.booking.domain.dto.BookingDto;
 import com.example.booking.domain.dto.CreateBookingDto;
 import com.example.booking.domain.dto.RebookBookingDto;
-import com.example.booking.domain.exception.ConstraintViolationException;
 import com.example.booking.domain.exception.ResourceNotFoundException;
 import com.example.booking.domain.model.Booking;
 import com.example.booking.domain.model.Property;
@@ -12,6 +11,7 @@ import com.example.booking.domain.repository.PropertyRepository;
 import com.example.booking.domain.validator.BookingValidator;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,10 +22,14 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class BookingService {
 
+    @Autowired
     private BookingRepository bookingRepository;
+
+    @Autowired
     private PropertyRepository propertyRepository;
+
+    @Autowired
     private BookingValidator bookingValidator;
-    private LockService lockService;
 
     @Transactional
     public BookingDto create(CreateBookingDto createBookingDto) {
@@ -43,15 +47,7 @@ public class BookingService {
 
         bookingValidator.validateCreateOrUpdate(booking);
 
-        boolean isLocked = lockService.lock(property.getId().toString());
-        if (!isLocked) {
-            throw new ConstraintViolationException("Could not acquire lock for booking!");
-        }
-
-        booking = bookingRepository.saveAndFlush(booking);
-
-        lockService.unlock(property.getId().toString());
-
+        booking = bookingRepository.save(booking);
         ModelMapper modelMapper = new ModelMapper();
 
         return modelMapper.map(booking, BookingDto.class);

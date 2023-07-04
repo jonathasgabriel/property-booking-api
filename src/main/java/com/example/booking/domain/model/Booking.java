@@ -52,9 +52,4 @@ public class Booking {
     public boolean isDateRangeValid() {
         return DateRangeUtils.isDateRangeValid(startDate, endDate);
     }
-
-    public boolean overlapsWith(Booking newBooking) {
-        return endDate.compareTo(newBooking.getStartDate()) >= 0
-                && startDate.compareTo(newBooking.getEndDate()) <= 0;
-    }
 }

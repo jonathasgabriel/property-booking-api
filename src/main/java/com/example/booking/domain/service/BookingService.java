@@ -11,7 +11,6 @@ import com.example.booking.domain.repository.PropertyRepository;
 import com.example.booking.domain.validator.BookingValidator;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,13 +21,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class BookingService {
 
-    @Autowired
     private BookingRepository bookingRepository;
-
-    @Autowired
     private PropertyRepository propertyRepository;
-
-    @Autowired
     private BookingValidator bookingValidator;
 
     @Transactional
@@ -81,12 +75,14 @@ public class BookingService {
         }
 
         Booking booking = bookingRepository.findById(id).get();
+
         Booking updatedBooking = Booking.builder()
                 .startDate(rebookBookingDto.getStart())
                 .endDate(rebookBookingDto.getEnd())
                 .build();
 
         booking.mergePropertiesFrom(updatedBooking);
+
         bookingValidator.validateCreateOrUpdate(booking);
 
         booking = bookingRepository.save(booking);

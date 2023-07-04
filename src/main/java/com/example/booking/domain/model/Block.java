@@ -53,8 +53,4 @@ public class Block {
         return DateRangeUtils.isDateRangeValid(startDate, endDate);
     }
 
-    public boolean overlapsWith(Booking booking) {
-        return endDate.compareTo(booking.getStartDate()) >= 0
-                && startDate.compareTo(booking.getEndDate()) <= 0;
-    }
 }

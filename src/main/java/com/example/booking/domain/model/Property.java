@@ -42,21 +42,4 @@ public class Property {
     public int hashCode() {
         return Objects.hash(id);
     }
-
-    public boolean canAcceptBooking(Booking bookingToBeAccepted) {
-        boolean hasOverlappingBookings = bookings.stream()
-                .filter(booking -> !booking.equals(bookingToBeAccepted))
-                .anyMatch(booking -> booking.overlapsWith(bookingToBeAccepted));
-
-        if (hasOverlappingBookings) {
-            return false;
-        }
-
-        boolean hasBlocks = blocks.stream().anyMatch(block -> block.overlapsWith(bookingToBeAccepted));
-        if (hasBlocks) {
-            return false;
-        }
-
-        return true;
-    }
 }

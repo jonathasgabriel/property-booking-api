@@ -5,7 +5,6 @@ import com.example.booking.domain.service.BlockService;
 import com.example.booking.domain.service.BookingService;
 import com.example.booking.domain.service.PropertyService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,13 +15,8 @@ import java.util.List;
 @RequestMapping(path = "/api")
 public class BookingController {
 
-    @Autowired
     private BookingService bookingService;
-
-    @Autowired
     private BlockService blockService;
-
-    @Autowired
     private PropertyService propertyService;
 
     @GetMapping("/properties")
